@@ -14,8 +14,12 @@ windows截图置顶工具
 - 固定大小截图
 
 
+## 下载:
+publish文件夹内下载解压运行
+ps:运行失败请安装.net 4.x以上环境https://dotnet.microsoft.com/download
 
-说明:
+
+## 说明:
 - ctrl+1 截图
 - ctrl+2 取色
 - esc丢弃图片

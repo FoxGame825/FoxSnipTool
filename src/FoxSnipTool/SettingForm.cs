@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 
 
 namespace FoxSnipTool {
-    public partial class Form1 : Form {
+    public partial class SettingForm : Form {
         private List<RadioButton> restPosList = new List<RadioButton>();
 
 
@@ -21,7 +21,7 @@ namespace FoxSnipTool {
         public static extern bool UnRegisterHotKey(IntPtr hWnd, int id);
 
 
-        public Form1() {
+        public SettingForm() {
             InitializeComponent();
 
             restPosList.Add(this.radioButton7);

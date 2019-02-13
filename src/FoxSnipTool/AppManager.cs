@@ -87,6 +87,8 @@ namespace FoxSnipTool {
             } else {
                 LoadIniConfig();
             }
+
+            var dd =IniManager.Instance;
         }
 
         public void SaveIniConfig() {
@@ -134,7 +136,7 @@ namespace FoxSnipTool {
         #endregion
 
 
-        public Form1 MainForm;
+        public SettingForm MainForm;
         private CaptureImageTool captureImg;
         private List<TopPicture> topPictureList = new List<TopPicture>();
         private HorseLight horseLight;

@@ -22,7 +22,7 @@ namespace FoxSnipTool {
                 AppManager.GetInstance().CheckIniConfig();
                 //TaskManager.GetInstance().LoadTaskData();
 
-                var form = new Form1();
+                var form = new SettingForm();
                 AppManager.GetInstance().MainForm = form;
                 form.Hide();
 

@@ -1,5 +1,5 @@
 ﻿namespace FoxSnipTool {
-    partial class Form1 {
+    partial class SettingForm {
         /// <summary>
         /// 必需的设计器变量。
         /// </summary>
@@ -24,7 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingForm));
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.settingPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();

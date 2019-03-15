@@ -45,6 +45,8 @@ namespace FoxSnipTool {
             this.Hide();
             this.Visible = false;
             updateFormUI();
+            this.tabControl1.SelectTab(0);
+            resizeWindowByTab(this.tabControl1.SelectedTab.Text);
         }
 
         void updateFormUI() {
@@ -69,8 +71,8 @@ namespace FoxSnipTool {
             this.ini_input.Text = AppSettings.IniPath;
             this.pictureBox1.BackColor = AppSettings.MaskColor;
 
-            this.checkBox3.Checked = false;
-            this.panel1.Enabled = false;
+            //this.checkBox3.Checked = false;
+            //this.panel1.Enabled = false;
             this.fixSizeWidth.Value = AppSettings.FixSize.Width;
             this.fixSizeWidth.Minimum = 1;
             this.fixSizeWidth.Maximum = Screen.PrimaryScreen.Bounds.Width;
@@ -79,8 +81,8 @@ namespace FoxSnipTool {
             this.fixSizeWidth.Maximum = Screen.PrimaryScreen.Bounds.Height;
 
             //休息
-            this.checkBox2.Checked = AppSettings.OpenRest;
-            this.groupBox1.Enabled = this.checkBox2.Checked;
+            //this.checkBox2.Checked = AppSettings.OpenRest;
+            //this.groupBox1.Enabled = this.checkBox2.Checked;
             this.dateTimePicker1.Text = AppSettings.WorkTimeSpan.ToString();
             this.dateTimePicker2.Text = AppSettings.RestTimeSpan.ToString();
             this.textBox3.Text = AppSettings.RestBackground;
@@ -97,6 +99,7 @@ namespace FoxSnipTool {
         }
 
         private void Form1_Activated(object sender, EventArgs e) {
+           
         }
 
         #region 窗体操作
@@ -258,9 +261,9 @@ namespace FoxSnipTool {
 
 
         private void checkBox2_CheckedChanged_1(object sender, EventArgs e) {
-            AppSettings.OpenRest = this.checkBox2.Checked;
-            this.groupBox1.Enabled = this.checkBox2.Checked;
-            AppManager.GetInstance().OpenRestFuncion(this.checkBox2.Checked);
+            //AppSettings.OpenRest = this.checkBox2.Checked;
+            //this.groupBox1.Enabled = this.checkBox2.Checked;
+            //AppManager.GetInstance().OpenRestFuncion(this.checkBox2.Checked);
         }
 
         private void button3_Click(object sender, EventArgs e) {
@@ -301,8 +304,8 @@ namespace FoxSnipTool {
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
-            AppSettings.CanFixSize = this.checkBox3.Checked;
-            this.panel1.Enabled = this.checkBox3.Checked;
+            //AppSettings.CanFixSize = this.checkBox3.Checked;
+            //this.panel1.Enabled = this.checkBox3.Checked;
         }
 
         private void fixSizeWidth_ValueChanged(object sender, EventArgs e)
@@ -318,5 +321,39 @@ namespace FoxSnipTool {
         private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
             System.Diagnostics.Process.Start(this.linkLabel4.Text);
         }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e) {
+            //调整窗口大小
+            resizeWindowByTab(this.tabControl1.SelectedTab.Text);
+        }
+
+        void resizeWindowByTab(string name) {
+            switch (name) {
+                case "常规":
+                    this.Size = new Size(590, 337);
+                    break;
+                case "截图":
+                    this.Size = new Size(590, 460);
+                    break;
+                case "休息":
+                    this.Size = new Size(590, 429);
+                    break;
+                case "快捷键":
+                    this.Size = new Size(590, 280);
+                    break;
+                case "wallhaven":
+                    this.Size = new Size(590, 302);
+                    break;
+                case "关于":
+                    this.Size = new Size(590, 302);
+                    break;
+            }
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e) {
+
+        }
+
+
     }
 }

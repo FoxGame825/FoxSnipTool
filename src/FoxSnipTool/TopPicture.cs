@@ -265,7 +265,7 @@ namespace FoxSnipTool {
             base.OnKeyUp(e);
             if(e.KeyCode == Keys.Escape) {
                 //this.Close();
-                AppManager.GetInstance().RemoveTopPicture(this);
+                AppMgr.GetInstance().RemoveTopPicture(this);
             }
         }
 
@@ -351,7 +351,7 @@ namespace FoxSnipTool {
         //图片放入剪切板
         private void ImgToClipBoard() {
             Clipboard.SetImage(this.BackgroundImage);
-            MessageBox.Show("图片已放入剪切板");
+            AppMgr.GetInstance().ShowTip("", "图片已放入剪切板");
         }
 
         //打开颜色选择器
@@ -419,7 +419,7 @@ namespace FoxSnipTool {
 
         private void RemoveToolStripMenuItem_Click(object sender, EventArgs e) {
             //this.Close();
-            AppManager.GetInstance().RemoveTopPicture(this);
+            AppMgr.GetInstance().RemoveTopPicture(this);
         }
 
         private void BorderColorToolStripMenuItem_Click(object sender, EventArgs e) {

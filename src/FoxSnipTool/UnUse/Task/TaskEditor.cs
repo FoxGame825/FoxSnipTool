@@ -82,7 +82,7 @@ namespace FoxSnipTool {
 
             Console.WriteLine(newdata.ToString());
             TaskManager.GetInstance().AddTask(newdata);
-            //AppManager.GetInstance().MainForm.UpdateTaskList();
+            //AppMgr.GetInstance().MainForm.UpdateTaskList();
 
             this.Close();
             this.Dispose();

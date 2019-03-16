@@ -128,7 +128,7 @@ namespace FoxSnipTool {
         void close() {
             this.Close();
             this.Dispose();
-            AppManager.GetInstance().RefreshRestTimer();
+            AppMgr.GetInstance().RefreshRestTimer();
         }
 
         private void switchBgToolStripMenuItem_Click(object sender, EventArgs e) {

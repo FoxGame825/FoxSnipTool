@@ -481,7 +481,7 @@ namespace CSharpWin_JD.CaptureImage
                     bExit = true;
                     if (OnZhiDingHandler != null)
                     {
-                        OnZhiDingHandler(Image);
+                        OnZhiDingHandler(Image.Clone() as Image);
                     }
                 }
             }
@@ -804,7 +804,7 @@ namespace CSharpWin_JD.CaptureImage
                 }
             }
             //将图片放到剪贴板（涂剑凯添加）
-            Clipboard.SetDataObject(this.Image,true);
+            //Clipboard.SetDataObject(this.Image,true);
         }
 
         #endregion
@@ -1050,7 +1050,7 @@ namespace CSharpWin_JD.CaptureImage
             if (SelectedImage) {
                 DrawLastImage();
                 if (OnZhiDingHandler != null) {
-                    OnZhiDingHandler(Image);
+                    OnZhiDingHandler(Image.Clone() as Image);
                 }
             }
         }

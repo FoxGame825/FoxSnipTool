@@ -87,7 +87,7 @@ namespace FoxSnipTool
             Duration -= this.timer1.Interval;
             if (Duration <= 0) {
                 this.timer1.Dispose();
-                AppManager.GetInstance().CloseRemindAnimateForm();
+                AppMgr.GetInstance().CloseRemindAnimateForm();
             }
         }
     }

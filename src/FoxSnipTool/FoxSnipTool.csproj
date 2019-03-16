@@ -41,9 +41,6 @@
     <Reference Include="ColorPickerWPF, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ColorPickerWPF.1.0.9\lib\net461\ColorPickerWPF.dll</HintPath>
     </Reference>
-    <Reference Include="INIFileParser, Version=2.5.2.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c, processorArchitecture=MSIL">
-      <HintPath>..\packages\ini-parser.2.5.2\lib\net20\INIFileParser.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.VisualBasic.Compatibility" />
     <Reference Include="PresentationCore" />
@@ -70,12 +67,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IniManager.cs" />
+    <Compile Include="AppMgr.cs" />
     <Compile Include="UnUse\Task\CombBoxItem.cs" />
     <Compile Include="UnUse\Task\TaskData.cs" />
     <Compile Include="Utils\AnimateImage.cs" />
     <Compile Include="AppDefine.cs" />
-    <Compile Include="AppManager.cs" />
     <Compile Include="AppSettings.cs" />
     <Compile Include="SettingForm.cs">
       <SubType>Form</SubType>

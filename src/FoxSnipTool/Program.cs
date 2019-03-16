@@ -19,12 +19,16 @@ namespace FoxSnipTool {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
-                AppManager.GetInstance().CheckIniConfig();
+                AppMgr.GetInstance().CheckIniConfig();
                 //TaskManager.GetInstance().LoadTaskData();
 
                 var form = new SettingForm();
-                AppManager.GetInstance().MainForm = form;
+                AppMgr.GetInstance().MainForm = form;
                 form.Hide();
+
+                if (AppSettings.AutoCache) {
+                    AppMgr.GetInstance().LoadAutoCacheImg();
+                }
 
                 Application.Run();
 

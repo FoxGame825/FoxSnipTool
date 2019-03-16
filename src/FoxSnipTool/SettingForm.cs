@@ -44,14 +44,25 @@ namespace FoxSnipTool {
         private void Form1_Load(object sender, EventArgs e) {
             this.Hide();
             this.Visible = false;
-            updateFormUI();
+            updateNormalPanel();
+            updateSnipPanel();
+            updateRestPanel();
             this.tabControl1.SelectTab(0);
             resizeWindowByTab(this.tabControl1.SelectedTab.Text);
         }
 
-        void updateFormUI() {
-            //截图
+        //常规
+        void updateNormalPanel() {
             this.checkBox1.Checked = AppSettings.AutoStart;
+            this.checkBox7.Checked = AppSettings.AutoCache;
+            this.checkBox3.Checked = AppSettings.CanFixSize;
+            this.checkBox4.Checked = AppSettings.OpenRest;
+            this.comboBox1.SelectedIndex = this.comboBox1.Items.IndexOf(AppSettings.Language);
+            this.ini_input.Text = AppSettings.IniPath;
+        }
+
+        //截图
+        void updateSnipPanel() {
             this.radioButton1.Checked = false;
             this.radioButton2.Checked = false;
             this.radioButton3.Checked = false;
@@ -68,19 +79,23 @@ namespace FoxSnipTool {
             }
 
             this.quickSave_input.Text = AppSettings.QuickSavePath;
-            this.ini_input.Text = AppSettings.IniPath;
             this.pictureBox1.BackColor = AppSettings.MaskColor;
-
-            //this.checkBox3.Checked = false;
-            //this.panel1.Enabled = false;
+            this.checkBox6.Checked = AppSettings.AutoToClipboard;
             this.fixSizeWidth.Value = AppSettings.FixSize.Width;
-            this.fixSizeWidth.Minimum = 1;
+            this.fixSizeWidth.Minimum = AppSettings.MiniModeSize.Width;
             this.fixSizeWidth.Maximum = Screen.PrimaryScreen.Bounds.Width;
             this.fixSizeHeigth.Value = AppSettings.FixSize.Height;
-            this.fixSizeHeigth.Minimum = 1;
+            this.fixSizeHeigth.Minimum = AppSettings.MiniModeSize.Height;
             this.fixSizeWidth.Maximum = Screen.PrimaryScreen.Bounds.Height;
+            this.numericUpDown1.Value = AppSettings.AutoCacheImgMax;
+            this.numericUpDown1.Minimum = 0;
+            this.textBox4.Text = AppSettings.AutoCachePath;
+            this.groupBox5.Enabled = AppSettings.CanFixSize;
+            this.groupBox4.Enabled = AppSettings.AutoCache;
+        }
 
-            //休息
+        //休息
+        void updateRestPanel() {
             //this.checkBox2.Checked = AppSettings.OpenRest;
             //this.groupBox1.Enabled = this.checkBox2.Checked;
             this.dateTimePicker1.Text = AppSettings.WorkTimeSpan.ToString();
@@ -94,13 +109,8 @@ namespace FoxSnipTool {
                     rd.Checked = true;
                 }
             }
-
-            //
         }
 
-        private void Form1_Activated(object sender, EventArgs e) {
-           
-        }
 
         #region 窗体操作
         //显示菜单消息
@@ -149,7 +159,9 @@ namespace FoxSnipTool {
         private void notifyIcon1_DoubleClick(object sender, EventArgs e) {
             this.Show();
             this.Activate();
-            updateFormUI();
+            updateNormalPanel();
+            updateSnipPanel();
+            updateRestPanel();
         }
 
         private void Form1_Resize(object sender, EventArgs e) {
@@ -160,7 +172,7 @@ namespace FoxSnipTool {
         private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
             e.Cancel = true;
             this.Hide();
-            AppManager.GetInstance().SaveIniConfig();
+            AppMgr.GetInstance().SaveIniConfig();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -171,15 +183,17 @@ namespace FoxSnipTool {
         private void settingPanelToolStripMenuItem_Click(object sender, EventArgs e) {
             this.Show();
             this.Activate();
-            updateFormUI();
+            updateNormalPanel();
+            updateSnipPanel();
+            updateRestPanel();
         }
 
         private void allTopPictureVisibleToolStripMenuItem_Click(object sender, EventArgs e) {
-            AppManager.GetInstance().AllTopPictureVisible(true);
+            AppMgr.GetInstance().AllTopPictureVisible(true);
         }
 
         private void clearAllToolStripMenuItem_Click(object sender, EventArgs e) {
-            AppManager.GetInstance().RemoveAllTopPicture();
+            AppMgr.GetInstance().RemoveAllTopPicture();
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -193,10 +207,10 @@ namespace FoxSnipTool {
                 case 0x0312:  //这个是window消息定义的注册的热键消息  
                     if (m.WParam.ToString() == AppSettings.CtrlF1_ID.ToString()) {
                         Console.WriteLine("热键: ctrl+f1");
-                        AppManager.GetInstance().EnterScreenMode();
+                        AppMgr.GetInstance().EnterScreenMode();
                     } else if (m.WParam.ToString() == AppSettings.CtrlF2_ID.ToString()) {
                         Console.WriteLine("热键: ctrl+f2");
-                        AppManager.GetInstance().EnterPickColorMode();
+                        AppMgr.GetInstance().EnterPickColorMode();
                     }
                     break;
             }
@@ -207,17 +221,17 @@ namespace FoxSnipTool {
        
 
         private void scan_btn_Click(object sender, EventArgs e) {
-            AppManager.GetInstance().ScanQuickSavePath();
+            AppMgr.GetInstance().ScanQuickSavePath();
             this.quickSave_input.Text = AppSettings.QuickSavePath;
         }
 
         private void default_btn_Click(object sender, EventArgs e) {
-            AppManager.GetInstance().ResetDefaultQuickSavePath();
+            AppMgr.GetInstance().ResetDefaultQuickSavePath();
             this.quickSave_input.Text = AppSettings.QuickSavePath;
         }
 
         private void audio_btn_Click(object sender, EventArgs e) {
-            AppManager.GetInstance().PlayAudio();
+            AppMgr.GetInstance().PlayAudio();
         }
 
         private void radioButton1_Click(object sender, EventArgs e) {
@@ -251,7 +265,7 @@ namespace FoxSnipTool {
         }
 
         private void hideToolStripMenuItem_Click(object sender, EventArgs e) {
-            AppManager.GetInstance().AllTopPictureVisible(false);
+            AppMgr.GetInstance().AllTopPictureVisible(false);
         }
 
         private void add_task_btn_Click(object sender, EventArgs e) {
@@ -263,14 +277,14 @@ namespace FoxSnipTool {
         private void checkBox2_CheckedChanged_1(object sender, EventArgs e) {
             //AppSettings.OpenRest = this.checkBox2.Checked;
             //this.groupBox1.Enabled = this.checkBox2.Checked;
-            //AppManager.GetInstance().OpenRestFuncion(this.checkBox2.Checked);
+            //AppMgr.GetInstance().OpenRestFuncion(this.checkBox2.Checked);
         }
 
         private void button3_Click(object sender, EventArgs e) {
             AppSettings.RestTimeSpan = TimeSpan.Parse(this.dateTimePicker2.Text);
             AppSettings.WorkTimeSpan = TimeSpan.Parse(this.dateTimePicker1.Text);
-            AppManager.GetInstance().RefreshRestTimer();
-            AppManager.GetInstance().ShowTip("休息提醒","设置成功");
+            AppMgr.GetInstance().RefreshRestTimer();
+            AppMgr.GetInstance().ShowTip("休息提醒","设置成功");
         }
 
         private void button1_Click(object sender, EventArgs e) {
@@ -299,7 +313,7 @@ namespace FoxSnipTool {
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             AppSettings.AutoStart = this.checkBox1.Checked;
-            AppManager.GetInstance().AutoStart(AppSettings.AutoStart);
+            AppMgr.GetInstance().AutoStart(AppSettings.AutoStart);
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
@@ -333,7 +347,7 @@ namespace FoxSnipTool {
                     this.Size = new Size(590, 337);
                     break;
                 case "截图":
-                    this.Size = new Size(590, 460);
+                    this.Size = new Size(590, 500);
                     break;
                 case "休息":
                     this.Size = new Size(590, 429);
@@ -354,6 +368,47 @@ namespace FoxSnipTool {
 
         }
 
+        private void checkBox7_CheckedChanged(object sender, EventArgs e) {
+            AppSettings.AutoCache = this.checkBox7.Checked;
+            this.groupBox4.Enabled = AppSettings.AutoCache;
+            //AppMgr.GetInstance().SaveIniConfig();
+        }
 
+        private void checkBox3_CheckedChanged_1(object sender, EventArgs e) {
+            AppSettings.CanFixSize = this.checkBox3.Checked;
+            this.groupBox5.Enabled = AppSettings.CanFixSize;
+            //AppMgr.GetInstance().SaveIniConfig();
+        }
+
+        private void checkBox4_CheckedChanged_1(object sender, EventArgs e) {
+            AppSettings.OpenRest = this.checkBox4.Checked;
+        }
+
+        private void checkBox6_CheckedChanged(object sender, EventArgs e) {
+            AppSettings.AutoToClipboard = this.checkBox6.Checked;
+            Console.WriteLine("AppSettings.AutoToClipboard = " + AppSettings.AutoToClipboard);
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e) {
+            AppSettings.AutoCacheImgMax = Decimal.ToInt32( this.numericUpDown1.Value);
+        }
+
+        private void button4_Click(object sender, EventArgs e) {
+            AppSettings.AutoCachePath = Application.StartupPath + "\\Cache\\";
+            this.textBox4.Text = AppSettings.AutoCachePath;
+        }
+
+        private void button2_Click(object sender, EventArgs e) {
+            FolderBrowserDialog folder = new FolderBrowserDialog();
+            folder.Description = "选择自动缓存目录";
+            if (folder.ShowDialog() == DialogResult.OK) {
+                AppSettings.AutoCachePath = folder.SelectedPath;
+                this.textBox4.Text = AppSettings.AutoCachePath;
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e) {
+            AppMgr.GetInstance().ClearAutoCacheFolder();
+        }
     }
 }

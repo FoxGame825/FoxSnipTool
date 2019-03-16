@@ -140,13 +140,13 @@ namespace FoxSnipTool {
         private void doTask(TaskData task) {
             switch (task.ShowWay) {
                 case TaskShowWay.Balloontip:
-                    AppManager.GetInstance().ShowTip(task.Title, task.Desc);
+                    AppMgr.GetInstance().ShowTip(task.Title, task.Desc);
                     break;
                 case TaskShowWay.Animation:
-                    AppManager.GetInstance().ShowRemindAnimateForm(task.Title + Environment.NewLine + task.Desc);
+                    AppMgr.GetInstance().ShowRemindAnimateForm(task.Title + Environment.NewLine + task.Desc);
                     break;
                 case TaskShowWay.HorseLight:
-                    AppManager.GetInstance().ShowHorseLight(task.Title + Environment.NewLine +task.Desc);
+                    AppMgr.GetInstance().ShowHorseLight(task.Title + Environment.NewLine +task.Desc);
                     break;
                 case TaskShowWay.MessageBox:
                     MessageBox.Show(task.Title,task.Desc);

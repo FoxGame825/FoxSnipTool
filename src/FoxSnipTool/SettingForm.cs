@@ -98,6 +98,28 @@ namespace FoxSnipTool {
         void updateRestPanel() {
             //this.checkBox2.Checked = AppSettings.OpenRest;
             //this.groupBox1.Enabled = this.checkBox2.Checked;
+            this.radioButton4.Checked = AppSettings.RestBackgroundShowType == RestBackgroudType.Fixed;
+            this.radioButton5.Checked = AppSettings.RestBackgroundShowType == RestBackgroudType.Random;
+            this.radioButton6.Checked = AppSettings.RestBackgroundShowType == RestBackgroudType.Default;
+
+
+            if (AppSettings.RestBackgroundShowType == RestBackgroudType.Default) {
+                this.textBox5.Enabled = false;
+                this.button6.Enabled = false;
+                this.textBox3.Enabled = false;
+                this.button1.Enabled = false;
+            } else if (AppSettings.RestBackgroundShowType == RestBackgroudType.Fixed) {
+                this.textBox3.Enabled = false;
+                this.button1.Enabled = false;
+                this.textBox5.Enabled = true;
+                this.button6.Enabled = true;
+            } else if (AppSettings.RestBackgroundShowType == RestBackgroudType.Random) {
+                this.textBox5.Enabled = false;
+                this.button6.Enabled = false;
+                this.textBox3.Enabled = true;
+                this.button1.Enabled = true;
+            }
+
             this.dateTimePicker1.Text = AppSettings.WorkTimeSpan.ToString();
             this.dateTimePicker2.Text = AppSettings.RestTimeSpan.ToString();
             this.textBox3.Text = AppSettings.RestBackground;
@@ -288,11 +310,11 @@ namespace FoxSnipTool {
         }
 
         private void button1_Click(object sender, EventArgs e) {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "jpg(*.jpg)|*.jpg";
-            if(openFileDialog.ShowDialog() == DialogResult.OK) {
-                AppSettings.RestBackground = openFileDialog.FileName;
-                this.textBox3.Text = AppSettings.RestBackground;
+            FolderBrowserDialog folder = new FolderBrowserDialog();
+            folder.Description = "选择休息背景图片随机目录";
+            if (folder.ShowDialog() == DialogResult.OK) {
+                AppSettings.RestRandomBackgroudFolder  = folder.SelectedPath;
+                this.textBox3.Text = AppSettings.RestRandomBackgroudFolder;
             }
         }
 
@@ -410,5 +432,40 @@ namespace FoxSnipTool {
         private void button7_Click(object sender, EventArgs e) {
             AppMgr.GetInstance().ClearAutoCacheFolder();
         }
+
+        private void backgroundTypeChanged(object sender,EventArgs e) {
+            RadioButton r = sender as RadioButton;
+            RestBackgroudType tp = (RestBackgroudType)Enum.Parse(typeof(RestBackgroudType), r.Tag.ToString());
+            AppSettings.RestBackgroundShowType = tp;
+
+            if(AppSettings.RestBackgroundShowType == RestBackgroudType.Default) {
+                this.textBox5.Enabled = false;
+                this.button6.Enabled = false;
+                this.textBox3.Enabled = false;
+                this.button1.Enabled = false;
+            }else if(AppSettings.RestBackgroundShowType == RestBackgroudType.Fixed) {
+                this.textBox3.Enabled = false;
+                this.button1.Enabled = false;
+                this.textBox5.Enabled = true;
+                this.button6.Enabled = true;
+            } else if(AppSettings.RestBackgroundShowType == RestBackgroudType.Random) {
+                this.textBox5.Enabled = false;
+                this.button6.Enabled = false;
+                this.textBox3.Enabled = true;
+                this.button1.Enabled = true;
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e) {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "jpg(*.jpg)|*.jpg";
+            if (openFileDialog.ShowDialog() == DialogResult.OK) {
+                AppSettings.RestBackground = openFileDialog.FileName;
+                this.textBox5.Text = AppSettings.RestBackground;
+            }
+
+        }
+
+       
     }
 }

@@ -57,6 +57,7 @@
             this.fixSizeHeigth = new System.Windows.Forms.NumericUpDown();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.button7 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.label20 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
@@ -71,8 +72,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
@@ -122,7 +123,6 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.button7 = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -257,7 +257,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 26);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(541, 353);
+            this.tabPage4.Size = new System.Drawing.Size(541, 378);
             this.tabPage4.TabIndex = 5;
             this.tabPage4.Text = "常规";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -485,6 +485,16 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "自动缓存";
             // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(424, 87);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(70, 28);
+            this.button7.TabIndex = 34;
+            this.button7.Text = "清除缓存";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(436, 45);
@@ -626,15 +636,15 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 26);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(541, 267);
+            this.tabPage6.Size = new System.Drawing.Size(541, 378);
             this.tabPage6.TabIndex = 4;
             this.tabPage6.Text = "休息";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.radioButton6);
             this.groupBox1.Controls.Add(this.button6);
-            this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.textBox5);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.radioButton5);
@@ -649,29 +659,34 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "背景";
             // 
+            // radioButton6
+            // 
+            this.radioButton6.AutoSize = true;
+            this.radioButton6.Location = new System.Drawing.Point(18, 22);
+            this.radioButton6.Name = "radioButton6";
+            this.radioButton6.Size = new System.Drawing.Size(50, 21);
+            this.radioButton6.TabIndex = 19;
+            this.radioButton6.TabStop = true;
+            this.radioButton6.Tag = "0";
+            this.radioButton6.Text = "默认";
+            this.radioButton6.UseVisualStyleBackColor = true;
+            this.radioButton6.Click += new System.EventHandler(this.backgroundTypeChanged);
+            // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(369, 53);
+            this.button6.Location = new System.Drawing.Point(430, 52);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(58, 28);
             this.button6.TabIndex = 18;
             this.button6.Text = "浏览";
             this.button6.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(430, 87);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(58, 28);
-            this.button5.TabIndex = 16;
-            this.button5.Text = "默认";
-            this.button5.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // textBox5
             // 
             this.textBox5.Location = new System.Drawing.Point(90, 55);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(270, 23);
+            this.textBox5.Size = new System.Drawing.Size(334, 23);
             this.textBox5.TabIndex = 18;
             // 
             // label2
@@ -686,24 +701,28 @@
             // radioButton5
             // 
             this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(122, 22);
+            this.radioButton5.Location = new System.Drawing.Point(198, 22);
             this.radioButton5.Name = "radioButton5";
             this.radioButton5.Size = new System.Drawing.Size(134, 21);
             this.radioButton5.TabIndex = 1;
             this.radioButton5.TabStop = true;
+            this.radioButton5.Tag = "2";
             this.radioButton5.Text = "指定文件夹随机显示";
             this.radioButton5.UseVisualStyleBackColor = true;
+            this.radioButton5.Click += new System.EventHandler(this.backgroundTypeChanged);
             // 
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(18, 22);
+            this.radioButton4.Location = new System.Drawing.Point(84, 22);
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(98, 21);
             this.radioButton4.TabIndex = 0;
             this.radioButton4.TabStop = true;
+            this.radioButton4.Tag = "1";
             this.radioButton4.Text = "指定图片显示";
             this.radioButton4.UseVisualStyleBackColor = true;
+            this.radioButton4.Click += new System.EventHandler(this.backgroundTypeChanged);
             // 
             // label17
             // 
@@ -716,7 +735,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(369, 87);
+            this.button1.Location = new System.Drawing.Point(430, 87);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(58, 28);
             this.button1.TabIndex = 2;
@@ -728,7 +747,7 @@
             // 
             this.textBox3.Location = new System.Drawing.Point(90, 90);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(270, 23);
+            this.textBox3.Size = new System.Drawing.Size(334, 23);
             this.textBox3.TabIndex = 1;
             // 
             // pictureBox4
@@ -943,7 +962,7 @@
             this.tabPage3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage3.Size = new System.Drawing.Size(541, 267);
+            this.tabPage3.Size = new System.Drawing.Size(541, 378);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "快捷键";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1018,7 +1037,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage2.Size = new System.Drawing.Size(541, 267);
+            this.tabPage2.Size = new System.Drawing.Size(541, 378);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "wallhaven";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1049,7 +1068,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 26);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(541, 267);
+            this.tabPage5.Size = new System.Drawing.Size(541, 378);
             this.tabPage5.TabIndex = 6;
             this.tabPage5.Text = "关于";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1177,16 +1196,6 @@
             this.toolStripStatusLabel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(131, 17);
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(424, 95);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(70, 28);
-            this.button7.TabIndex = 34;
-            this.button7.Text = "清除缓存";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // SettingForm
             // 
@@ -1338,7 +1347,6 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RadioButton radioButton5;
@@ -1347,6 +1355,7 @@
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.RadioButton radioButton6;
     }
 }
 

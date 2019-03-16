@@ -84,20 +84,23 @@ namespace FoxSnipTool {
         public static Color RemindAniFontColor = Color.Green;
         
 
-        #region 休息
+        //----------------------------------------休息设置--------------------------------------------------//
         //休息时长
         public static TimeSpan RestTimeSpan = new TimeSpan(0, 10, 0);
         //工作时长
         public static TimeSpan WorkTimeSpan = new TimeSpan(0, 30, 0);
-        //休息背景路径
+        //背景类型
+        public static RestBackgroudType RestBackgroundShowType = RestBackgroudType.Default;
+        //休息固定背景路径
         public static string RestBackground = "";
+        //休息随机背景文件夹路径
+        public static string RestRandomBackgroudFolder = "";
         //休息时间字体颜色
         public static Color RestTimeFontColor = Color.GreenYellow;
         //休息信息显示位置
         public static RestInfoPos RestInfoPoint = RestInfoPos.Center;
         public static Font DefaultFont = new Font("微软雅黑", 9);
 
-        #endregion
 
         //随机边框颜色数组
         private static Color[] BorderColorArray = new Color[10]{

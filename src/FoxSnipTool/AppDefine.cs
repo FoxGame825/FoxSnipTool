@@ -52,4 +52,12 @@ namespace FoxSnipTool {
         ButtomRight,
     }
 
+    //休息界面 背景显示方式
+    public enum RestBackgroudType
+    {
+        Default,    //默认
+        Fixed,      //固定图片
+        Random,     //随机
+    }
+
 }

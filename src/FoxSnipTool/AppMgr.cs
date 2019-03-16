@@ -55,8 +55,166 @@ namespace FoxSnipTool
             }
         }
 
+
+        #region 截图
+
+        /// <summary>
+        /// 进入截图模式
+        /// </summary>
+        public void EnterScreenMode() {
+            CancelScreenMode();
+            if (AppSettings.CanFixSize) {
+                captureImg = new CaptureImageTool(AppSettings.MaskColor, AppSettings.FixSize);
+            } else {
+                captureImg = new CaptureImageTool(AppSettings.MaskColor);
+            }
+
+            captureImg.SelectCursor = Cursors.Cross;
+            captureImg.DrawCursor = Cursors.VSplit;
+
+            captureImg.OnZhiDingHandler += (Image img) =>
+            {
+                PlayAudio();
+                CreateTopPicture(img);
+                if (AppSettings.AutoToClipboard) {
+                    Clipboard.SetImage(img);
+                }
+                if (AppSettings.AutoCache) {
+                    SaveAutoCacheImg(img);
+                }
+
+                CancelScreenMode();
+            };
+
+            captureImg.OnExitHandler += () => {
+                CancelScreenMode();
+            };
+
+            captureImg.Show();
+        }
+
+        /// <summary>
+        /// 取消截图模式
+        /// </summary>
+        public void CancelScreenMode() {
+            if (captureImg != null) {
+                captureImg.Close();
+                captureImg.Dispose();
+            }
+            GC.Collect();
+        }
+
+        /// <summary>
+        /// 创建置顶图片
+        /// </summary>
+        /// <param name="img"></param>
+        public void CreateTopPicture(Image img) {
+            TopPicture top = new TopPicture(img);
+            this.topPictureList.Add(top);
+            top.StartPosition = FormStartPosition.CenterScreen;
+            top.Show();
+            //top.Location = Cursor.Position;
+        }
+
+        /// <summary>
+        /// 删除置顶图片
+        /// </summary>
+        /// <param name="pic"></param>
+        public void RemoveTopPicture(TopPicture pic) {
+            if (this.topPictureList.Contains(pic)) {
+                this.topPictureList.Remove(pic);
+            }
+            pic.Close();
+            pic.Dispose();
+            GC.Collect();
+        }
+
+        /// <summary>
+        /// 移除所有置顶图片
+        /// </summary>
+        public void RemoveAllTopPicture() {
+            foreach (var pic in this.topPictureList) {
+                pic.Close();
+                pic.Dispose();
+            }
+            this.topPictureList.Clear();
+            GC.Collect();
+        }
+
+        /// <summary>
+        /// 显示隐藏所有置顶图片
+        /// </summary>
+        /// <param name="vis"></param>
+        public void AllTopPictureVisible(bool vis) {
+            foreach (var pic in this.topPictureList) {
+                pic.Visible = vis;
+            }
+        }
+
+        /// <summary>
+        /// 保存自动缓存图片
+        /// </summary>
+        /// <param name="img"></param>
+        public void SaveAutoCacheImg(Image img) {
+            if (!Directory.Exists(AppSettings.AutoCachePath)) {
+                Directory.CreateDirectory(AppSettings.AutoCachePath);
+            }
+
+            string name = string.Format("cache_{0}.jpg", DateTime.Now.ToFileTime());
+            //超出最大缓存,移除头缓存图片
+            if (autoCacheQueue.Count >= AppSettings.AutoCacheImgMax) {
+                System.IO.File.Delete(AppSettings.AutoCachePath + autoCacheQueue.Dequeue());
+            }
+            autoCacheQueue.Enqueue(name);
+            img.Save(AppSettings.AutoCachePath + name);
+        }
+
+        /// <summary>
+        /// 加载自动缓存图片
+        /// </summary>
+        public void LoadAutoCacheImg() {
+            if (Directory.Exists(AppSettings.AutoCachePath) && AppSettings.AutoCacheImgMax > 0) {
+                var allfl = Directory.GetFiles(AppSettings.AutoCachePath, "*.jpg", SearchOption.TopDirectoryOnly);
+                int count = AppSettings.AutoCacheImgMax > allfl.Length ? allfl.Length : AppSettings.AutoCacheImgMax;
+
+                foreach (var iter in allfl) {
+                    if (iter.IndexOf("cache_") > 0) {
+                        var img = Image.FromFile(iter);
+                        if (img != null) {
+                            CreateTopPicture(img);
+
+                            string name = Path.GetFileNameWithoutExtension(iter);
+                            autoCacheQueue.Enqueue(name);
+                            Console.WriteLine(name);
+
+                            if (autoCacheQueue.Count >= AppSettings.AutoCacheImgMax) {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 清除缓存文件夹
+        /// </summary>
+        public void ClearAutoCacheFolder() {
+            if (Directory.Exists(AppSettings.AutoCachePath)) {
+                foreach (var iter in Directory.GetFiles(AppSettings.AutoCachePath, "*", SearchOption.TopDirectoryOnly)) {
+                    System.IO.File.Delete(iter);
+                }
+                ShowTip("自动缓存", "缓存清理完成!");
+            }
+        }
+
+
+        #endregion
+
+
+
         #region 休息
-        
+
         public void OpenRestFuncion(bool bOpen) {
             if (bOpen) {
                 TempWorkDate = DateTime.Now + AppSettings.WorkTimeSpan;
@@ -134,162 +292,7 @@ namespace FoxSnipTool
         #endregion
 
 
-        #region 截图
-
-        /// <summary>
-        /// 进入截图模式
-        /// </summary>
-        public void EnterScreenMode() {
-            CancelScreenMode();
-            if (AppSettings.CanFixSize) {
-                captureImg = new CaptureImageTool(AppSettings.MaskColor, AppSettings.FixSize);
-            } else {
-                captureImg = new CaptureImageTool(AppSettings.MaskColor);
-            }
-
-            captureImg.SelectCursor = Cursors.Cross;
-            captureImg.DrawCursor = Cursors.VSplit;
-
-            captureImg.OnZhiDingHandler += (Image img) =>
-            {
-                PlayAudio();
-                CreateTopPicture(img);
-                if (AppSettings.AutoToClipboard) {
-                    Clipboard.SetImage(img);
-                }
-                if (AppSettings.AutoCache) {
-                    SaveAutoCacheImg(img);
-                }
-
-                CancelScreenMode();
-            };
-
-            captureImg.OnExitHandler += () => {
-                CancelScreenMode();
-            };
-           
-            captureImg.Show();
-        }
-
-        /// <summary>
-        /// 取消截图模式
-        /// </summary>
-        public void CancelScreenMode() {
-            if (captureImg != null) {
-                captureImg.Close();
-                captureImg.Dispose();
-            }
-            GC.Collect();
-        }
-
-        /// <summary>
-        /// 创建置顶图片
-        /// </summary>
-        /// <param name="img"></param>
-        public void CreateTopPicture(Image img) {
-            TopPicture top = new TopPicture(img);
-            this.topPictureList.Add(top);
-            top.StartPosition = FormStartPosition.CenterScreen;
-            top.Show();
-            //top.Location = Cursor.Position;
-        }
-
-        /// <summary>
-        /// 删除置顶图片
-        /// </summary>
-        /// <param name="pic"></param>
-        public void RemoveTopPicture(TopPicture pic) {
-            if (this.topPictureList.Contains(pic)) {
-                this.topPictureList.Remove(pic);
-            }
-            pic.Close();
-            pic.Dispose();
-            GC.Collect();
-        }
-
-        /// <summary>
-        /// 移除所有置顶图片
-        /// </summary>
-        public void RemoveAllTopPicture() {
-            foreach (var pic in this.topPictureList) {
-                pic.Close();
-                pic.Dispose();
-            }
-            this.topPictureList.Clear();
-            GC.Collect();
-        }
-
-        /// <summary>
-        /// 显示隐藏所有置顶图片
-        /// </summary>
-        /// <param name="vis"></param>
-        public void AllTopPictureVisible(bool vis) {
-            foreach (var pic in this.topPictureList) {
-                pic.Visible = vis;
-            }
-        }
-
-        /// <summary>
-        /// 保存自动缓存图片
-        /// </summary>
-        /// <param name="img"></param>
-        public void SaveAutoCacheImg(Image img) {
-            if (!Directory.Exists(AppSettings.AutoCachePath)) {
-                Directory.CreateDirectory(AppSettings.AutoCachePath);
-            }
-
-            string name = string.Format("cache_{0}.jpg", DateTime.Now.ToFileTime());
-            //超出最大缓存,移除头缓存图片
-            if(autoCacheQueue.Count >= AppSettings.AutoCacheImgMax) {
-                System.IO.File.Delete(AppSettings.AutoCachePath + autoCacheQueue.Dequeue());
-            }
-            autoCacheQueue.Enqueue(name);
-            img.Save(AppSettings.AutoCachePath + name);
-        }
-
-        /// <summary>
-        /// 加载自动缓存图片
-        /// </summary>
-        public void LoadAutoCacheImg() {
-            if (Directory.Exists(AppSettings.AutoCachePath) && AppSettings.AutoCacheImgMax > 0) {
-                var allfl = Directory.GetFiles(AppSettings.AutoCachePath, "*.jpg", SearchOption.TopDirectoryOnly);
-                int count = AppSettings.AutoCacheImgMax > allfl.Length ? allfl.Length : AppSettings.AutoCacheImgMax;
-
-                foreach(var iter in allfl) {
-                    if(iter.IndexOf("cache_") > 0) {
-                        var img = Image.FromFile(iter);
-                        if (img != null) {
-                            CreateTopPicture(img);
-
-                            string name = Path.GetFileNameWithoutExtension(iter);
-                            autoCacheQueue.Enqueue(name);
-                            Console.WriteLine(name);
-
-                            if (autoCacheQueue.Count >= AppSettings.AutoCacheImgMax) {
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// 清除缓存文件夹
-        /// </summary>
-        public void ClearAutoCacheFolder() {
-            if (Directory.Exists(AppSettings.AutoCachePath)) {
-                foreach (var iter in Directory.GetFiles(AppSettings.AutoCachePath, "*", SearchOption.TopDirectoryOnly)) {
-                    System.IO.File.Delete(iter);
-                }
-                ShowTip("自动缓存","缓存清理完成!");
-            }
-        }
-
-
-        #endregion
-
-
+      
 
         #region 取色
         //进入取色模式

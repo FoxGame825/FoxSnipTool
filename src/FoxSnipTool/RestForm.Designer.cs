@@ -86,59 +86,59 @@
             this.switchBgToolStripMenuItem,
             this.closeToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 186);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 186);
             // 
             // delay1mToolStripMenuItem
             // 
             this.delay1mToolStripMenuItem.Name = "delay1mToolStripMenuItem";
-            this.delay1mToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.delay1mToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.delay1mToolStripMenuItem.Text = "延长1分钟";
             this.delay1mToolStripMenuItem.Click += new System.EventHandler(this.delay1mToolStripMenuItem_Click);
             // 
             // delay5mToolStripMenuItem
             // 
             this.delay5mToolStripMenuItem.Name = "delay5mToolStripMenuItem";
-            this.delay5mToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.delay5mToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.delay5mToolStripMenuItem.Text = "延长5分钟";
             this.delay5mToolStripMenuItem.Click += new System.EventHandler(this.delay5mToolStripMenuItem_Click);
             // 
             // delay10mToolStripMenuItem
             // 
             this.delay10mToolStripMenuItem.Name = "delay10mToolStripMenuItem";
-            this.delay10mToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.delay10mToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.delay10mToolStripMenuItem.Text = "延长10分钟";
             this.delay10mToolStripMenuItem.Click += new System.EventHandler(this.delay10mToolStripMenuItem_Click);
             // 
             // delay30mToolStripMenuItem
             // 
             this.delay30mToolStripMenuItem.Name = "delay30mToolStripMenuItem";
-            this.delay30mToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.delay30mToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.delay30mToolStripMenuItem.Text = "延长30分钟";
             this.delay30mToolStripMenuItem.Click += new System.EventHandler(this.delay30mToolStripMenuItem_Click);
             // 
             // delay1hToolStripMenuItem
             // 
             this.delay1hToolStripMenuItem.Name = "delay1hToolStripMenuItem";
-            this.delay1hToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.delay1hToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.delay1hToolStripMenuItem.Text = "延长1小时";
             this.delay1hToolStripMenuItem.Click += new System.EventHandler(this.delay1hToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // switchBgToolStripMenuItem
             // 
             this.switchBgToolStripMenuItem.Name = "switchBgToolStripMenuItem";
-            this.switchBgToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.switchBgToolStripMenuItem.Text = "更改背景";
+            this.switchBgToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.switchBgToolStripMenuItem.Text = "切换背景";
             this.switchBgToolStripMenuItem.Click += new System.EventHandler(this.switchBgToolStripMenuItem_Click);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.closeToolStripMenuItem.Text = "强制退出";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 

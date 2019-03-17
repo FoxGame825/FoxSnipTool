@@ -16,36 +16,55 @@ namespace FoxSnipTool {
 
         public RestForm(TimeSpan span) {
             InitializeComponent();
-
             this.TopMost = true;
-            
             this.FormBorderStyle = FormBorderStyle.None;    //隐藏窗体边框
             this.Bounds = Screen.PrimaryScreen.Bounds;
-
-            if (File.Exists(AppSettings.RestBackground)) {
-                this.BackgroundImage = Image.FromFile(AppSettings.RestBackground);
-            } else {
-                this.BackgroundImage = Properties.Resources.rest;
-            }
-
+            showBg();
             this.label1.ForeColor = AppSettings.RestTimeFontColor;
-
-
             openDt = DateTime.Now.TimeOfDay;
-
             closeDt = openDt.Add(span);
             this.surplusBar1.Minimum = 0;
             this.surplusBar1.Maximum = System.Convert.ToInt32( Math.Max(0, (closeDt - openDt).TotalSeconds));
-
             this.timer1.Start();
 
+            this.switchBgToolStripMenuItem.Enabled = AppSettings.RestBackgroundShowType == RestBackgroudType.Random;
+        }
+
+        void showBg() {
+            bool bOK = false;
+            if(AppSettings.RestBackgroundShowType == RestBackgroudType.Fixed) {
+                if (File.Exists(AppSettings.RestBackground)) {
+                    this.BackgroundImage = Image.FromFile(AppSettings.RestBackground);
+                    bOK = true;
+                }
+            } else if(AppSettings.RestBackgroundShowType == RestBackgroudType.Random) {
+                var img = getRandomFiles(AppSettings.RestRandomBackgroudFolder);
+                if (img != null) {
+                    this.BackgroundImage = img;
+                    bOK = true;
+                }
+            }
+
+            if (!bOK) {
+                this.BackgroundImage = Properties.Resources.rest;
+            }
+        }
+
+        Image getRandomFiles(string path) {
+            if (Directory.Exists(path)) {
+                var fls = Directory.GetFiles(path, "*.jpg", SearchOption.TopDirectoryOnly);
+                if(fls !=null && fls.Length > 0) {
+                    var rand = new System.Random();
+                    var sel = fls[rand.Next(0, fls.Length - 1)];
+                    return Image.FromFile(sel);
+                }
+            }
+            return null;
         }
 
         private void timer1_Tick(object sender, EventArgs e) {
             var temp = closeDt - DateTime.Now.TimeOfDay;
-
             this.TopMost = true;
-
             this.label1.Text = DateTime.Now.ToLongTimeString();
             this.surplusBar1.Content = string.Format("剩余时间:{0}", temp.ToString(@"hh\:mm\:ss"));
             this.surplusBar1.SetValue( System.Convert.ToInt32(temp.TotalSeconds)); 
@@ -132,20 +151,11 @@ namespace FoxSnipTool {
         }
 
         private void switchBgToolStripMenuItem_Click(object sender, EventArgs e) {
-            this.TopMost = false;
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "jpg(*.jpg)|*.jpg";
-            if (openFileDialog.ShowDialog() == DialogResult.OK) {
-                AppSettings.RestBackground = openFileDialog.FileName;
-                if (File.Exists(AppSettings.RestBackground)) {
-                    this.BackgroundImage = Image.FromFile(AppSettings.RestBackground);
-                } else {
-                    this.BackgroundImage = Properties.Resources.rest;
+            if(AppSettings.RestBackgroundShowType == RestBackgroudType.Random) {
+                var img = getRandomFiles(AppSettings.RestRandomBackgroudFolder);
+                if(img != null) {
+                    this.BackgroundImage = img;
                 }
-
-                this.TopMost = true;
-            } else {
-                this.TopMost = true;
             }
         }
     }

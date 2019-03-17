@@ -458,12 +458,16 @@ namespace FoxSnipTool
             IniWriteValue("snip", "AutoCacheImgMax", AppSettings.AutoCacheImgMax.ToString());
 
 
-            IniWriteValue("config", "RunTask", AppSettings.RunTask.ToString());
-            IniWriteValue("config", "RestTimeSpan", AppSettings.RestTimeSpan.ToString());
-            IniWriteValue("config", "WorkTimeSpan", AppSettings.WorkTimeSpan.ToString());
-            IniWriteValue("config", "RestBackground", AppSettings.RestBackground.ToString());
-            IniWriteValue("config", "RestTimeFontColor", AppSettings.RestTimeFontColor.ToArgb().ToString());
-            IniWriteValue("config", "RestInfoPoint", AppSettings.RestInfoPoint.ToString());
+            IniWriteValue("rest", "RestBackgroundShowType", AppSettings.RestBackgroundShowType.ToString());
+            IniWriteValue("rest", "RestBackground", AppSettings.RestBackground.ToString());
+            IniWriteValue("rest", "RestRandomBackgroudFolder", AppSettings.RestRandomBackgroudFolder.ToString());
+            IniWriteValue("rest", "RestTimeSpan", AppSettings.RestTimeSpan.ToString());
+            IniWriteValue("rest", "WorkTimeSpan", AppSettings.WorkTimeSpan.ToString());
+            IniWriteValue("rest", "RestTimeFontColor", AppSettings.RestTimeFontColor.ToArgb().ToString());
+            IniWriteValue("rest", "RestInfoPoint", AppSettings.RestInfoPoint.ToString());
+
+
+            //IniWriteValue("rest", "RunTask", AppSettings.RunTask.ToString());
 
         }
 
@@ -487,17 +491,17 @@ namespace FoxSnipTool
             AppSettings.AutoCachePath = IniReadValue("snip", "AutoCachePath", AppSettings.AutoCachePath);
             AppSettings.AutoCacheImgMax = Convert.ToInt32(IniReadValue("snip", "AutoCacheImgMax", AppSettings.AutoCacheImgMax.ToString()));
 
+            //AppSettings.RunTask = Convert.ToBoolean(IniReadValue("config", "RunTask", "false"));
 
-
-            AppSettings.RunTask = Convert.ToBoolean(IniReadValue("config", "RunTask", "false"));
-            AppSettings.RestTimeSpan = TimeSpan.Parse((IniReadValue("config", "RestTimeSpan", "00:10:00")));
-            AppSettings.WorkTimeSpan = TimeSpan.Parse((IniReadValue("config", "WorkTimeSpan", "00:30:00")));
-            AppSettings.RestBackground = (IniReadValue("config", "RestBackground", ""));
-            string restColorStr = IniReadValue("config", "RestTimeFontColor", Color.GreenYellow.ToArgb().ToString());
+            AppSettings.RestBackground = (IniReadValue("rest", "RestBackground", AppSettings.RestBackground));
+            AppSettings.RestBackgroundShowType = (RestBackgroudType)Enum.Parse(typeof(RestBackgroudType), IniReadValue("rest", "RestBackgroundShowType",AppSettings.RestBackgroundShowType.ToString()));
+            AppSettings.RestRandomBackgroudFolder = IniReadValue("rest", "RestRandomBackgroudFolder", AppSettings.RestRandomBackgroudFolder);
+            AppSettings.RestTimeSpan = TimeSpan.Parse((IniReadValue("rest", "RestTimeSpan", "00:10:00")));
+            AppSettings.WorkTimeSpan = TimeSpan.Parse((IniReadValue("rest", "WorkTimeSpan", "00:30:00")));
+            string restColorStr = IniReadValue("rest", "RestTimeFontColor", Color.GreenYellow.ToArgb().ToString());
             AppSettings.RestTimeFontColor = Color.FromArgb(System.Convert.ToInt32(restColorStr));
-            AppSettings.RestInfoPoint = (RestInfoPos)Enum.Parse(typeof(RestInfoPos), IniReadValue("config", "RestInfoPoint", RestInfoPos.Center.ToString()));
+            AppSettings.RestInfoPoint = (RestInfoPos)Enum.Parse(typeof(RestInfoPos), IniReadValue("rest", "RestInfoPoint", RestInfoPos.Center.ToString()));
 
-            OpenRestFuncion(AppSettings.OpenRest);
         }
 
         #endregion

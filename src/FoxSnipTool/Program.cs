@@ -29,6 +29,7 @@ namespace FoxSnipTool {
                 if (AppSettings.AutoCache) {
                     AppMgr.GetInstance().LoadAutoCacheImg();
                 }
+                AppMgr.GetInstance().OpenRestFuncion(AppSettings.OpenRest);
 
                 Application.Run();
 

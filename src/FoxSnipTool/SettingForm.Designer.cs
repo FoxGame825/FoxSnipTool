@@ -123,6 +123,7 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.contextMenuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -144,6 +145,7 @@
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.statusStrip1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // notifyIcon1
@@ -624,15 +626,7 @@
             // 
             // tabPage6
             // 
-            this.tabPage6.Controls.Add(this.groupBox1);
-            this.tabPage6.Controls.Add(this.pictureBox4);
-            this.tabPage6.Controls.Add(this.groupBox2);
-            this.tabPage6.Controls.Add(this.label14);
-            this.tabPage6.Controls.Add(this.dateTimePicker2);
-            this.tabPage6.Controls.Add(this.label23);
-            this.tabPage6.Controls.Add(this.dateTimePicker1);
-            this.tabPage6.Controls.Add(this.button3);
-            this.tabPage6.Controls.Add(this.label22);
+            this.tabPage6.Controls.Add(this.panel1);
             this.tabPage6.Location = new System.Drawing.Point(4, 26);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
@@ -652,7 +646,7 @@
             this.groupBox1.Controls.Add(this.label17);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Location = new System.Drawing.Point(23, 19);
+            this.groupBox1.Location = new System.Drawing.Point(15, 16);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(497, 125);
             this.groupBox1.TabIndex = 17;
@@ -753,7 +747,7 @@
             // pictureBox4
             // 
             this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox4.Location = new System.Drawing.Point(99, 228);
+            this.pictureBox4.Location = new System.Drawing.Point(85, 219);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(89, 22);
             this.pictureBox4.TabIndex = 14;
@@ -771,7 +765,7 @@
             this.groupBox2.Controls.Add(this.radioButton14);
             this.groupBox2.Controls.Add(this.radioButton9);
             this.groupBox2.Controls.Add(this.radioButton15);
-            this.groupBox2.Location = new System.Drawing.Point(338, 150);
+            this.groupBox2.Location = new System.Drawing.Point(330, 150);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(182, 100);
             this.groupBox2.TabIndex = 15;
@@ -898,7 +892,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(26, 228);
+            this.label14.Location = new System.Drawing.Point(12, 219);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(59, 17);
             this.label14.TabIndex = 13;
@@ -907,7 +901,7 @@
             // dateTimePicker2
             // 
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePicker2.Location = new System.Drawing.Point(99, 193);
+            this.dateTimePicker2.Location = new System.Drawing.Point(85, 184);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.ShowUpDown = true;
             this.dateTimePicker2.Size = new System.Drawing.Size(90, 23);
@@ -916,7 +910,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(26, 196);
+            this.label23.Location = new System.Drawing.Point(12, 187);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(59, 17);
             this.label23.TabIndex = 10;
@@ -925,7 +919,7 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePicker1.Location = new System.Drawing.Point(99, 159);
+            this.dateTimePicker1.Location = new System.Drawing.Point(85, 150);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.ShowUpDown = true;
             this.dateTimePicker1.Size = new System.Drawing.Size(90, 23);
@@ -933,7 +927,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(436, 265);
+            this.button3.Location = new System.Drawing.Point(437, 262);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 28);
             this.button3.TabIndex = 12;
@@ -944,7 +938,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(26, 164);
+            this.label22.Location = new System.Drawing.Point(12, 155);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(59, 17);
             this.label22.TabIndex = 8;
@@ -1197,6 +1191,22 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(131, 17);
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.groupBox1);
+            this.panel1.Controls.Add(this.button3);
+            this.panel1.Controls.Add(this.groupBox2);
+            this.panel1.Controls.Add(this.pictureBox4);
+            this.panel1.Controls.Add(this.label22);
+            this.panel1.Controls.Add(this.dateTimePicker1);
+            this.panel1.Controls.Add(this.label14);
+            this.panel1.Controls.Add(this.label23);
+            this.panel1.Controls.Add(this.dateTimePicker2);
+            this.panel1.Location = new System.Drawing.Point(6, 6);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(529, 300);
+            this.panel1.TabIndex = 18;
+            // 
             // SettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -1236,7 +1246,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage6.ResumeLayout(false);
-            this.tabPage6.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
@@ -1251,6 +1260,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1356,6 +1367,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.RadioButton radioButton6;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

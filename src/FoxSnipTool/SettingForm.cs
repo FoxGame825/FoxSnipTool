@@ -122,7 +122,8 @@ namespace FoxSnipTool {
 
             this.dateTimePicker1.Text = AppSettings.WorkTimeSpan.ToString();
             this.dateTimePicker2.Text = AppSettings.RestTimeSpan.ToString();
-            this.textBox3.Text = AppSettings.RestBackground;
+            this.textBox5.Text = AppSettings.RestBackground;
+            this.textBox3.Text = AppSettings.RestRandomBackgroudFolder;
             this.pictureBox4.BackColor = AppSettings.RestTimeFontColor;
 
             foreach (var rd in this.restPosList) {
@@ -131,6 +132,9 @@ namespace FoxSnipTool {
                     rd.Checked = true;
                 }
             }
+
+            this.panel1.Enabled = AppSettings.OpenRest;
+
         }
 
 
@@ -404,6 +408,8 @@ namespace FoxSnipTool {
 
         private void checkBox4_CheckedChanged_1(object sender, EventArgs e) {
             AppSettings.OpenRest = this.checkBox4.Checked;
+            this.panel1.Enabled = AppSettings.OpenRest;
+            AppMgr.GetInstance().OpenRestFuncion(AppSettings.OpenRest);
         }
 
         private void checkBox6_CheckedChanged(object sender, EventArgs e) {

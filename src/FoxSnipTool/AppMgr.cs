@@ -309,6 +309,15 @@ namespace FoxSnipTool
             }
             this.PickColorForm = null;
         }
+
+        //生成当前鼠标位置颜色面板
+        public void CreateColorShip() {
+            if(this.PickColorForm !=null && this.PickColorForm.CanPick) {
+                Color col = this.PickColorForm.SamplingColor;
+
+            }
+        }
+
         #endregion
 
         #region setting panel

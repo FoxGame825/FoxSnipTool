@@ -23,6 +23,26 @@ namespace FoxSnipTool {
         private IntPtr _hdc = IntPtr.Zero;
         private readonly IntPtr _hWnd = IntPtr.Zero;
 
+        public bool CanPick {
+            get {
+                return RunPick && this.Visible;
+            }
+        }
+
+        //采样颜色
+        public Color SamplingColor {
+            get {
+                System.Drawing.Point p = MousePosition;
+                this.pos_label.Text = string.Format("X:{0},Y:{1}", p.X, p.Y);
+
+                uint color = GetPixel(_hdc, p.X, p.Y);
+                byte r = GetRValue(color);
+                byte g = GetGValue(color);
+                byte b = GetBValue(color);
+                return Color.FromArgb(r, g,b);
+            }
+        }
+
         public PickColor() {
             InitializeComponent();
             this.timer1.Interval = 100;

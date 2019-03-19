@@ -47,7 +47,14 @@ namespace FoxSnipTool {
             InitializeComponent();
             this.timer1.Interval = 100;
             this.timer1.Tick += Timer1_Tick;
+          
         }
+
+        private void Bt_Click(object sender, EventArgs e) {
+            this.contextMenuStrip1.Show((sender as Button).Location);
+        }
+
+      
 
         private void Timer1_Tick(object sender, EventArgs e) {
             System.Drawing.Point p = MousePosition;
@@ -88,6 +95,14 @@ namespace FoxSnipTool {
         }
         public static byte GetBValue(uint rgb) {
             return (byte)(rgb >> 16);
+        }
+
+        private void listBox1_DrawItem(object sender, DrawItemEventArgs e) {
+            e.DrawBackground();
+
+            Brush pBlackBrush = Brushes.Red;
+            e.Graphics.FillRectangle(pBlackBrush, e.Bounds);
+            e.Graphics.DrawRectangle(new Pen(Color.Black), e.Bounds);
         }
     }
 }

@@ -24,6 +24,15 @@ namespace FoxSnipTool {
         private const int CS_DropSHADOW = 0x20000;
         private ContextMenuStrip contextMenuStrip1;
         private System.ComponentModel.IContainer components;
+        private ToolStripMenuItem per100ToolStripMenuItem;
+        private const int GCL_STYLE = (-26);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern int SetClassLong(IntPtr hwnd, int nIndex, int dwNewLong);
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern int GetClassLong(IntPtr hwnd, int nIndex);
+        #endregion
+
         private ToolStripMenuItem RemoveToolStripMenuItem;
         private ToolStripMenuItem BorderColorToolStripMenuItem;
         private ToolStripMenuItem toClipBoardToolStripMenuItem;
@@ -36,14 +45,6 @@ namespace FoxSnipTool {
         private ToolStripMenuItem per30ToolStripMenuItem;
         private ToolStripMenuItem per50ToolStripMenuItem;
         private ToolStripMenuItem per70ToolStripMenuItem;
-        private ToolStripMenuItem per100ToolStripMenuItem;
-        private const int GCL_STYLE = (-26);
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        public static extern int SetClassLong(IntPtr hwnd, int nIndex, int dwNewLong);
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        public static extern int GetClassLong(IntPtr hwnd, int nIndex);
-        #endregion
 
 
         private bool mousePressd;
@@ -59,7 +60,7 @@ namespace FoxSnipTool {
 
         public TopPicture(Image img) {
             InitializeComponent();
-            SetClassLong(this.Handle, GCL_STYLE, GetClassLong(this.Handle, GCL_STYLE) | CS_DropSHADOW); //无边框阴影
+            //SetClassLong(this.Handle, GCL_STYLE, GetClassLong(this.Handle, GCL_STYLE) | CS_DropSHADOW); //无边框阴影
             this.FormBorderStyle = FormBorderStyle.None;    //隐藏窗体边框
             this.BackgroundImage = img;
             this.BackgroundImageLayout = ImageLayout.Stretch;
@@ -96,11 +97,11 @@ namespace FoxSnipTool {
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.RemoveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toumingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.per10ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.per30ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.per50ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.per70ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.per100ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.per70ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.per50ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.per30ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.per10ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -109,20 +110,20 @@ namespace FoxSnipTool {
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.BorderColorToolStripMenuItem,
             this.toClipBoardToolStripMenuItem,
+            this.toumingToolStripMenuItem,
             this.toolStripSeparator2,
             this.quickSaveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
             this.toolStripSeparator1,
-            this.RemoveToolStripMenuItem,
-            this.toumingToolStripMenuItem});
+            this.RemoveToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 148);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 170);
             // 
             // BorderColorToolStripMenuItem
             // 
             this.BorderColorToolStripMenuItem.Image = global::FoxSnipTool.Properties.Resources.color_wheel_24px_526860_easyicon_net;
             this.BorderColorToolStripMenuItem.Name = "BorderColorToolStripMenuItem";
-            this.BorderColorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.BorderColorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.BorderColorToolStripMenuItem.Text = "边框颜色";
             this.BorderColorToolStripMenuItem.Click += new System.EventHandler(this.BorderColorToolStripMenuItem_Click);
             // 
@@ -130,20 +131,20 @@ namespace FoxSnipTool {
             // 
             this.toClipBoardToolStripMenuItem.Image = global::FoxSnipTool.Properties.Resources.clipboard_24px_28293_easyicon_net;
             this.toClipBoardToolStripMenuItem.Name = "toClipBoardToolStripMenuItem";
-            this.toClipBoardToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.toClipBoardToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.toClipBoardToolStripMenuItem.Text = "放入剪切板";
             this.toClipBoardToolStripMenuItem.Click += new System.EventHandler(this.toClipBoardToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // quickSaveToolStripMenuItem
             // 
             this.quickSaveToolStripMenuItem.Image = global::FoxSnipTool.Properties.Resources.folder_lightning_power_24px_7077_easyicon_net;
             this.quickSaveToolStripMenuItem.Name = "quickSaveToolStripMenuItem";
-            this.quickSaveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.quickSaveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.quickSaveToolStripMenuItem.Text = "快速保存";
             this.quickSaveToolStripMenuItem.Click += new System.EventHandler(this.quickSaveToolStripMenuItem_Click);
             // 
@@ -151,20 +152,20 @@ namespace FoxSnipTool {
             // 
             this.saveAsToolStripMenuItem.Image = global::FoxSnipTool.Properties.Resources.disk_save_all_24px_4650_easyicon_net;
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveAsToolStripMenuItem.Text = "另存为";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // RemoveToolStripMenuItem
             // 
             this.RemoveToolStripMenuItem.Image = global::FoxSnipTool.Properties.Resources.delete_24px_520120_easyicon_net;
             this.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem";
-            this.RemoveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.RemoveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.RemoveToolStripMenuItem.Text = "删除";
             this.RemoveToolStripMenuItem.Click += new System.EventHandler(this.RemoveToolStripMenuItem_Click);
             // 
@@ -177,40 +178,8 @@ namespace FoxSnipTool {
             this.per30ToolStripMenuItem,
             this.per10ToolStripMenuItem});
             this.toumingToolStripMenuItem.Name = "toumingToolStripMenuItem";
-            this.toumingToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.toumingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.toumingToolStripMenuItem.Text = "透明度";
-            // 
-            // per10ToolStripMenuItem
-            // 
-            this.per10ToolStripMenuItem.Name = "per10ToolStripMenuItem";
-            this.per10ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.per10ToolStripMenuItem.Tag = "10";
-            this.per10ToolStripMenuItem.Text = "10%";
-            this.per10ToolStripMenuItem.Click += new System.EventHandler(this.setOpacity);
-            // 
-            // per30ToolStripMenuItem
-            // 
-            this.per30ToolStripMenuItem.Name = "per30ToolStripMenuItem";
-            this.per30ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.per30ToolStripMenuItem.Tag = "30";
-            this.per30ToolStripMenuItem.Text = "30%";
-            this.per30ToolStripMenuItem.Click += new System.EventHandler(this.setOpacity);
-            // 
-            // per50ToolStripMenuItem
-            // 
-            this.per50ToolStripMenuItem.Name = "per50ToolStripMenuItem";
-            this.per50ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.per50ToolStripMenuItem.Tag = "50";
-            this.per50ToolStripMenuItem.Text = "50%";
-            this.per50ToolStripMenuItem.Click += new System.EventHandler(this.setOpacity);
-            // 
-            // per70ToolStripMenuItem
-            // 
-            this.per70ToolStripMenuItem.Name = "per70ToolStripMenuItem";
-            this.per70ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.per70ToolStripMenuItem.Tag = "70";
-            this.per70ToolStripMenuItem.Text = "70%";
-            this.per70ToolStripMenuItem.Click += new System.EventHandler(this.setOpacity);
             // 
             // per100ToolStripMenuItem
             // 
@@ -218,10 +187,42 @@ namespace FoxSnipTool {
             this.per100ToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.per100ToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.per100ToolStripMenuItem.Name = "per100ToolStripMenuItem";
-            this.per100ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.per100ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.per100ToolStripMenuItem.Tag = "s";
             this.per100ToolStripMenuItem.Text = "100%";
             this.per100ToolStripMenuItem.Click += new System.EventHandler(this.setOpacity);
+            // 
+            // per70ToolStripMenuItem
+            // 
+            this.per70ToolStripMenuItem.Name = "per70ToolStripMenuItem";
+            this.per70ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.per70ToolStripMenuItem.Tag = "70";
+            this.per70ToolStripMenuItem.Text = "70%";
+            this.per70ToolStripMenuItem.Click += new System.EventHandler(this.setOpacity);
+            // 
+            // per50ToolStripMenuItem
+            // 
+            this.per50ToolStripMenuItem.Name = "per50ToolStripMenuItem";
+            this.per50ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.per50ToolStripMenuItem.Tag = "50";
+            this.per50ToolStripMenuItem.Text = "50%";
+            this.per50ToolStripMenuItem.Click += new System.EventHandler(this.setOpacity);
+            // 
+            // per30ToolStripMenuItem
+            // 
+            this.per30ToolStripMenuItem.Name = "per30ToolStripMenuItem";
+            this.per30ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.per30ToolStripMenuItem.Tag = "30";
+            this.per30ToolStripMenuItem.Text = "30%";
+            this.per30ToolStripMenuItem.Click += new System.EventHandler(this.setOpacity);
+            // 
+            // per10ToolStripMenuItem
+            // 
+            this.per10ToolStripMenuItem.Name = "per10ToolStripMenuItem";
+            this.per10ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.per10ToolStripMenuItem.Tag = "10";
+            this.per10ToolStripMenuItem.Text = "10%";
+            this.per10ToolStripMenuItem.Click += new System.EventHandler(this.setOpacity);
             // 
             // TopPicture
             // 

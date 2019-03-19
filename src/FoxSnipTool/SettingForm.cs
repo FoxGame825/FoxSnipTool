@@ -8,7 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-
+using System.Threading;
+using System.Globalization;
 
 namespace FoxSnipTool {
     public partial class SettingForm : Form {
@@ -49,6 +50,7 @@ namespace FoxSnipTool {
             updateRestPanel();
             this.tabControl1.SelectTab(0);
             resizeWindowByTab(this.tabControl1.SelectedTab.Text);
+
         }
 
         //常规
@@ -57,7 +59,6 @@ namespace FoxSnipTool {
             this.checkBox7.Checked = AppSettings.AutoCache;
             this.checkBox3.Checked = AppSettings.CanFixSize;
             this.checkBox4.Checked = AppSettings.OpenRest;
-            this.comboBox1.SelectedIndex = this.comboBox1.Items.IndexOf(AppSettings.Language);
             this.ini_input.Text = AppSettings.IniPath;
         }
 
@@ -381,9 +382,6 @@ namespace FoxSnipTool {
                 case "快捷键":
                     this.Size = new Size(590, 280);
                     break;
-                case "wallhaven":
-                    this.Size = new Size(590, 302);
-                    break;
                 case "关于":
                     this.Size = new Size(590, 302);
                     break;
@@ -472,6 +470,6 @@ namespace FoxSnipTool {
 
         }
 
-       
+        
     }
 }

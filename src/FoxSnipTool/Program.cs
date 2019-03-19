@@ -26,12 +26,15 @@ namespace FoxSnipTool {
                 AppMgr.GetInstance().MainForm = form;
                 form.Hide();
 
+
                 if (AppSettings.AutoCache) {
                     AppMgr.GetInstance().LoadAutoCacheImg();
                 }
                 AppMgr.GetInstance().OpenRestFuncion(AppSettings.OpenRest);
 
                 Application.Run();
+
+               
 
             } else {
                 //There   is   another   instance   of   this   process.   
